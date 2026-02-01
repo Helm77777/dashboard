@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتب حلم لخدمات الأيادي العاملة | Dream Office</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* المتغيرات والألوان - أزرق سماوي مع ذهبي وفضي */
+        :root {
+            --primary-color: #004e92; /* أزرق ملكي */
+            --secondary-color: #000428; /* كحلي غامق */
+            --accent-color: #ff9f00; /* برتقالي ذهبي */
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --text-color: #333;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border_box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* تنسيق زر اللغة */
+        .lang-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px; /* سيتغير بناءً على الاتجاه */
+            z-index: 1000;
+            background: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 159, 0, 0.4);
+            font-family: inherit;
+        }
+
+        /* الهيدر واللوجو */
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            padding: 20px 0;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            width: 100%;
+            max-width: 800px; /* عرض كبير للوجو العرضي */
+            margin: 0 auto 20px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo-placeholder {
+            /* مكان اللوجو */
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 8px;
+            color: var(--white);
+        }
+        
+        /* إذا أضفت صورة، احذف كلاس placeholder واستخدم img */
+        .logo-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease;
+        }
+
+        /* قسم التقييم العائم */
+        .rating-box {
+            background: var(--white);
+            color: var(--primary-color);
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .rating-box i { color: gold; }
+
+        /* الأقسام العامة */
+        section {
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* قسم الخدمات - بطاقات عائمة */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, #f0f4ff, #fff);
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--accent-color);
+        }
+        
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 { margin-bottom: 10px; color: var(--secondary-color); }
+
+        /* قسم قنوات التواصل */
+        .channels-section {
+            background: linear-gradient(to left, #ece9e6, #ffffff);
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .channel-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .channel-btn:hover { transform: scale(1.03); }
+        .bg-whatsapp { background: #25D366; }
+        .bg-tiktok { background: #000000; }
+        .bg-facebook { background: #1877F2; }
+
+        /* قسم من نحن */
+        .about-section {
+            background: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* قسم التواصل والموقع */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .branch-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            border-right: 5px solid var(--primary-color); /* شريط جانبي */
+        }
+        
+        [dir="ltr"] .branch-card { border-right: none; border-left: 5px solid var(--primary-color); }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            margin-left: 10px;
+            color: var(--accent-color);
+            width: 25px;
+        }
+        
+        [dir="ltr"] .contact-item i { margin-left: 0; margin-right: 10px; }
+
+        .contact-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* الفوتر */
+        footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .management-info {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .manager-name { color: var(--accent-color); font-size: 1.2rem; }
+
+        /* الأنيميشن */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 1.8rem; }
+            .service-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="lang-btn" onclick="toggleLanguage()">English</button>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-placeholder">
+                <i class="fas fa-plane-departure" style="margin-left:15px;"></i>
+                <span data-i18n="logo_text">مكتب حلم لخدمات الأيادي العاملة</span>
+            </div>
+        </div>
+        
+        <div class="hero-text">
+            <h1 data-i18n="hero_title">نحقق حلمك في الحصول على وظيفة الأحلام</h1>
+            <p data-i18n="hero_desc">بوابتك الآمنة للعمل في الخارج بمهنية ومصداقية</p>
+            
+            <div class="rating-box">
+                <span id="customer-count">1000</span>+ 
+                <span data-i18n="satisfied_client">عميل راضٍ</span>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="services">
+        <h2 class="section-title" data-i18n="services_title">خدماتنا المتميزة</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-passport service-icon"></i>
+                <h3 data-i18n="srv_1">توفير فيزا عمل بالسعودية</h3>
+                <p data-i18n="srv_1_desc">مع توفير فرص عمل للشباب</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-id-card-alt service-icon"></i>
+                <h3 data-i18n="srv_2">فيزا عمل حرة</h3>
+                <p data-i18n="srv_2_desc">نظام ثلاثة أشهر</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-user-tie service-icon"></i>
+                <h3 data-i18n="srv_3">فيز فردية</h3>
+                <p data-i18n="srv_3_desc">إنجاز سريع ومضمون</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-notes-medical service-icon"></i>
+                <h3 data-i18n="srv_4">استخراج شهادة صحية</h3>
+                <p data-i18n="srv_4_desc">متابعة الفحص الطبي</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-stamp service-icon"></i>
+                <h3 data-i18n="srv_5">خدمات تعقيب</h3>
+                <p data-i18n="srv_5_desc">تخليص معاملات الدوائر الحكومية</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-file-contract service-icon"></i>
+                <h3 data-i18n="srv_6">تجهيز مستندات</h3>
+                <p data-i18n="srv_6_desc">ترجمة وتوثيق الأوراق</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-users service-icon"></i>
+                <h3 data-i18n="srv_7">توظيف أيادي عاملة</h3>
+                <p data-i18n="srv_7_desc">كوادر مؤهلة ومدربة</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-building service-icon"></i>
+                <h3 data-i18n="srv_8">خدمات الشركات</h3>
+                <p data-i18n="srv_8_desc">توفير عمالة للقطاع الخاص</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="channels-section">
+        <h2 class="section-title" data-i18n="channels_title">قنواتنا وإثباتات العمل</h2>
+        <div class="channels-grid">
+            
+            <div class="channel-group">
+                <h3 style="text-align:center; margin-bottom:15px;" data-i18n="proofs">الإثباتات والتوثيق</h3>
+                <a href="https://whatsapp.com/channel/0029VbALLu43GJP5HZnlGL2o" class="channel-btn bg-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp" style="margin-left:10px;"></i> <span data-i18n="wa_proofs">قناة إثباتات العملاء واتساب</span>
+                </a>
+                <a href="https://vm.tiktok.com/ZS914U4PrxNj7-A8Lti/" class="channel-btn bg-tiktok" target="_blank">
+                    <i class="fab fa-tiktok" style="margin-left:10px;"></i> <span data-i18n="tiktok_proofs">إثباتات العملاء تيك توك</span>
+                </a>
+            </div>
+
+            <div class="channel-group">
+                <h3 style="text-align:center; margin-bottom:15px;" data-i18n="jobs_channels">قنوات الوظائف</h3>
+                <a href="https://chat.whatsapp.com/CiSuA7AWDDc5NubVJoBSnW" class="channel-btn bg-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp" style="margin-left:10px;"></i> <span data-i18n="wa_jobs1">قناة الوظائف 1</span>
+                </a>
+                <a href="https://whatsapp.com/channel/0029VbAVOx196H4KBNcNZR3p" class="channel-btn bg-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp" style="margin-left:10px;"></i> <span data-i18n="wa_jobs2">قناة الوظائف 2</span>
+                </a>
+            </div>
+
+            <div class="channel-group">
+                <h3 style="text-align:center; margin-bottom:15px;" data-i18n="facebook">فيسبوك</h3>
+                <a href="https://www.facebook.com/share/1CMnn3NFPf/" class="channel-btn bg-facebook" target="_blank">
+                    <i class="fab fa-facebook" style="margin-left:10px;"></i> <span data-i18n="fb_page1">صفحتنا الأولى</span>
+                </a>
+                <a href="https://www.facebook.com/share/1KEHRJzLXn/" class="channel-btn bg-facebook" target="_blank">
+                    <i class="fab fa-facebook" style="margin-left:10px;"></i> <span data-i18n="fb_page2">صفحتنا الثانية</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2 class="section-title" style="color:white;" data-i18n="about_title">من نحن</h2>
+        <div class="about-content">
+            <p data-i18n="about_text">
+                نحن فريق مكتب حلم لخدمات الأيادي العاملة. نقوم بتوفير فيز عمل مع توفير فرص عمل في السعودية للشباب العاطلين عن العمل، ونقوم بمساعدتهم ونوفر لهم أفضل الفرص الوظيفية في المملكة. نسعى جاهدين لإنجاز جميع معاملاتهم وحل كل العوائق التي يواجهونها بمصداقية وأمانة.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title" data-i18n="contact_title">تواصل معنا</h2>
+        <div class="contact-container">
+            
+            <div class="branch-card">
+                <h3 style="margin-bottom:20px; color:var(--primary-color);" data-i18n="aden_branch">فرع عدن</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-i18n="aden_loc">الموقع: عدن - خور مكسر - جولة البط</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:967784584171" class="contact-link">967784584171</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/967784584171" class="contact-link" target="_blank" data-i18n="chat_wa">محادثة واتساب</a>
+                </div>
+            </div>
+
+            <div class="branch-card">
+                <h3 style="margin-bottom:20px; color:var(--primary-color);" data-i18n="sanaa_branch">فرع صنعاء</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-i18n="sanaa_loc">الموقع: صنعاء - شارع القاهرة - بجانب الكريمي</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:967777058576" class="contact-link">967777058576</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/967777058576" class="contact-link" target="_blank" data-i18n="chat_wa">محادثة واتساب</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <h3 data-i18n="logo_text">مكتب حلم لخدمات الأيادي العاملة</h3>
+        <div class="management-info">
+            <p><span data-i18n="manager_label">تحت إشراف المدير العام:</span> <span class="manager-name" data-i18n="manager_name">أبو حمزة</span></p>
+            <p><span data-i18n="pr_label">العلاقات العامة والتسويق:</span> <span class="manager-name" data-i18n="pr_name">عبدالله الشيباني</span></p>
+        </div>
+        <p style="margin-top:20px; font-size:0.8rem;">&copy; 2024 Dream Office. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // نصوص اللغات
+        const translations = {
+            ar: {
+                logo_text: "مكتب حلم لخدمات الأيادي العاملة",
+                hero_title: "نحقق حلمك في الحصول على وظيفة الأحلام",
+                hero_desc: "بوابتك الآمنة للعمل في الخارج بمهنية ومصداقية",
+                satisfied_client: "عميل راضٍ",
+                services_title: "خدماتنا المتميزة",
+                srv_1: "توفير فيزا عمل بالسعودية",
+                srv_1_desc: "مع توفير فرص عمل للشباب",
+                srv_2: "فيزا عمل حرة",
+                srv_2_desc: "نظام ثلاثة أشهر",
+                srv_3: "فيز فردية",
+                srv_3_desc: "إنجاز سريع ومضمون",
+                srv_4: "استخراج شهادة صحية",
+                srv_4_desc: "متابعة الفحص الطبي",
+                srv_5: "خدمات تعقيب",
+                srv_5_desc: "تخليص معاملات الدوائر الحكومية",
+                srv_6: "تجهيز مستندات",
+                srv_6_desc: "ترجمة وتوثيق الأوراق",
+                srv_7: "توظيف أيادي عاملة",
+                srv_7_desc: "كوادر مؤهلة ومدربة",
+                srv_8: "خدمات الشركات",
+                srv_8_desc: "توفير عمالة للقطاع الخاص",
+                channels_title: "قنواتنا وإثباتات العمل",
+                proofs: "الإثباتات والتوثيق",
+                jobs_channels: "قنوات الوظائف",
+                facebook: "فيسبوك",
+                wa_proofs: "قناة إثباتات العملاء واتساب",
+                tiktok_proofs: "إثباتات العملاء تيك توك",
+                wa_jobs1: "قناة الوظائف 1",
+                wa_jobs2: "قناة الوظائف 2",
+                fb_page1: "صفحتنا الأولى",
+                fb_page2: "صفحتنا الثانية",
+                about_title: "من نحن",
+                about_text: "نحن فريق مكتب حلم لخدمات الأيادي العاملة. نقوم بتوفير فيز عمل مع توفير فرص عمل في السعودية للشباب العاطلين عن العمل، ونقوم بمساعدتهم ونوفر لهم أفضل الفرص الوظيفية في المملكة. نسعى جاهدين لإنجاز جميع معاملاتهم وحل كل العوائق التي يواجهونها بمصداقية وأمانة.",
+                contact_title: "تواصل معنا",
+                aden_branch: "فرع عدن",
+                aden_loc: "الموقع: عدن - خور مكسر - جولة البط",
+                sanaa_branch: "فرع صنعاء",
+                sanaa_loc: "الموقع: صنعاء - شارع القاهرة - بجانب الكريمي",
+                chat_wa: "محادثة واتساب",
+                manager_label: "تحت إشراف المدير العام:",
+                manager_name: "أبو حمزة",
+                pr_label: "العلاقات العامة والتسويق:",
+                pr_name: "عبدالله الشيباني"
+            },
+            en: {
+                logo_text: "Dream Office for Manpower Services",
+                hero_title: "We Make Your Dream Job a Reality",
+                hero_desc: "Your safe gateway to working abroad with professionalism and credibility",
+                satisfied_client: "Satisfied Clients",
+                services_title: "Our Premium Services",
+                srv_1: "Saudi Work Visa",
+                srv_1_desc: "Providing job opportunities for youth",
+                srv_2: "Freelance Visa",
+                srv_2_desc: "Three months system",
+                srv_3: "Individual Visas",
+                srv_3_desc: "Fast and guaranteed processing",
+                srv_4: "Health Certificate",
+                srv_4_desc: "Medical examination follow-up",
+                srv_5: "Expediting Services",
+                srv_5_desc: "Government transaction clearance",
+                srv_6: "Document Preparation",
+                srv_6_desc: "Translation and attestation",
+                srv_7: "Manpower Recruitment",
+                srv_7_desc: "Qualified and trained staff",
+                srv_8: "Corporate Services",
+                srv_8_desc: "Manpower supply for private sector",
+                channels_title: "Our Channels & Proofs",
+                proofs: "Proofs & Documentation",
+                jobs_channels: "Job Channels",
+                facebook: "Facebook",
+                wa_proofs: "WhatsApp Client Proofs",
+                tiktok_proofs: "TikTok Client Proofs",
+                wa_jobs1: "Jobs Channel 1",
+                wa_jobs2: "Jobs Channel 2",
+                fb_page1: "Our Page 1",
+                fb_page2: "Our Page 2",
+                about_title: "About Us",
+                about_text: "We are the Dream Office team for manpower services. We provide work visas along with job opportunities in Saudi Arabia for unemployed youth, assisting them and providing the best job opportunities in the Kingdom. We strive to complete all their transactions and solve all obstacles they face with credibility and honesty.",
+                contact_title: "Contact Us",
+                aden_branch: "Aden Branch",
+                aden_loc: "Location: Aden - Khormaksar - Al-Bat Roundabout",
+                sanaa_branch: "Sana'a Branch",
+                sanaa_loc: "Location: Sana'a - Cairo St - Next to Al-Kuraimi",
+                chat_wa: "Chat on WhatsApp",
+                manager_label: "Under General Manager Supervision:",
+                manager_name: "Abu Hamza",
+                pr_label: "Public Relations & Marketing:",
+                pr_name: "Abdullah Al-Shaibani"
+            }
+        };
+
+        // دالة تغيير اللغة
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const btn = document.querySelector('.lang-btn');
+            const currentLang = html.getAttribute('lang');
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            
+            // تغيير اتجاه الصفحة
+            html.setAttribute('lang', newLang);
+            html.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
+            
+            // تغيير النص في الزر
+            btn.textContent = newLang === 'ar' ? 'English' : 'العربية';
+            
+            // تغيير النصوص بناءً على data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[newLang][key]) {
+                    element.textContent = translations[newLang][key];
+                }
+            });
+
+            // تعديل الخط بناءً على اللغة
+            if(newLang === 'en') {
+                document.body.style.fontFamily = "'Poppins', sans-serif";
+            } else {
+                document.body.style.fontFamily = "'Cairo', sans-serif";
+            }
+        }
+
+        // عداد العملاء يتزايد تلقائياً
+        let count = 1000;
+        const counterElement = document.getElementById('customer-count');
+        
+        setInterval(() => {
+            // زيادة عشوائية لجعلها تبدو طبيعية
+            count += Math.floor(Math.random() * 2); 
+            counterElement.textContent = count;
+        }, 5000); // يزيد كل 5 ثواني
+    </script>
+</body>
+</html>
